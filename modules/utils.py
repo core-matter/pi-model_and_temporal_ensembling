@@ -1,7 +1,7 @@
 import numpy as np
 import torch.nn as nn
 import math
-import config
+import modules.config as config
 
 
 def ramp_up(epoch, rump_up_epochs=config.rampup_length):
