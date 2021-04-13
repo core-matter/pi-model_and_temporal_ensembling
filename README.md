@@ -1,4 +1,4 @@
-# pi-model_and_temporal_ensembling
+# Pi-model & temporal ensembling
 Implementation of [Pi-model&amp;temporal ensembling article](https://arxiv.org/abs/1610.02242) on PyTorch.
 
 
