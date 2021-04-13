@@ -1,10 +1,10 @@
-from Dataset import PiModelDataset
-from net import Model
+from modules.Dataset import PiModelDataset
+from modules.net import Model
 from torch.utils.tensorboard import SummaryWriter
-from utils import *
+from modules.utils import *
 import torch
 from torch.utils.data import DataLoader
-from train_scripts import train
+from modules.train_scripts import train
 import argparse
 
 
