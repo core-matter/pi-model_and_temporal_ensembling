@@ -5,7 +5,7 @@ from pathlib import Path
 from torchvision import transforms
 from sklearn.preprocessing import LabelEncoder
 import random
-import config
+import modules.config as config
 
 
 class PiModelDataset(Dataset):
