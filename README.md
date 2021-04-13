@@ -25,4 +25,5 @@ train.py [-h]   [--dataset_path DATASET_PATH]
 -add usage example via bash script
 -add temporal ensembling model
 -add training statistics
+-refactor zca script
 ~~~~
