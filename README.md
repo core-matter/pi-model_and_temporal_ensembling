@@ -21,10 +21,8 @@ train.py [-h]   [--dataset_path DATASET_PATH]
 ## TODO:
 ~~~~
 -add checkpoints
-
--add prediction
-
--add temp ens model
-
+-add predictions script
+-add usage example via bash script
+-add temporal ensembling model
 -add training statistics
 ~~~~
