@@ -45,7 +45,6 @@ def fit_epoch(model, train_loader, criterion, optimizer, w_t, device='cpu'):
             tr_unsupervised_loss = torch.tensor(0)
 
         loss = (tr_supervised_loss + tr_unsupervised_loss)
-        # loss = (supervised_loss) / inputs2.size(0)
         loss.backward()
         optimizer.step()
 
@@ -58,7 +57,6 @@ def fit_epoch(model, train_loader, criterion, optimizer, w_t, device='cpu'):
 
     train_loss = running_loss / processed_data  # TODO нужно делить на inputs.size(0)
     train_acc = running_corrects.cpu().numpy() / processed_data
-    train_acc = running_corrects.double() / processed_data
 
     return train_loss, train_acc, tr_supervised_loss, tr_unsupervised_loss
 
@@ -90,7 +88,6 @@ def eval_epoch(model, val_loader, criterion, w_t, device='cpu'):
         val_unsupervised_loss = (w_t / (2 * inputs1.size(0))) * torch.sum((softmax(z1, dim=1) -
                                                                            softmax(z2, dim=1)) ** 2)
 
-        # loss = supervised_loss / inputs.size(0)
         loss = (val_supervised_loss + val_unsupervised_loss)
         preds = torch.argmax(z1, 1)
         running_loss += loss.item() * inputs1.size(0)

@@ -1,3 +1,5 @@
+"""Constants used in the articled"""
+
 num_classes                         = 10                        # Number of classes.
 supervised_ratio                    = 1                         # Rate of labeled data.
 rampup_length                       = 80                        # Ramp learning rate and unsupervised loss weight up during first n epochs.
