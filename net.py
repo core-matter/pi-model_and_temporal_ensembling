@@ -3,7 +3,7 @@ import torch.nn as nn
 
 class Model(nn.Module):
     """Convolutional neural network from the article.
-     (gaussian noise is added in Dataset.py)"""
+     (gaussian noise is added in dataset class)"""
     def __init__(self, n_classes):
         super(Model, self).__init__()
         self.conv1 = nn.Sequential(

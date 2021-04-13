@@ -1,14 +1,8 @@
 import torch
-import numpy as np
 from tqdm import tqdm
 from torch.nn.functional import softmax
 import config
 from utils import ramp_down, ramp_up
-# from parser import arg_parser
-# import argparse
-#
-# parser = argparse.ArgumentParser()
-# parser = arg_parser(parser)
 
 
 def fit_epoch(model, train_loader, criterion, optimizer, w_t, device='cpu'):
@@ -64,8 +58,8 @@ def fit_epoch(model, train_loader, criterion, optimizer, w_t, device='cpu'):
 
     train_loss = running_loss / processed_data  # TODO нужно делить на inputs.size(0)
     train_acc = running_corrects.cpu().numpy() / processed_data
-    # train_acc = running_corrects.double() / processed_data
-    print('train_loss:', train_loss)
+    train_acc = running_corrects.double() / processed_data
+
     return train_loss, train_acc, tr_supervised_loss, tr_unsupervised_loss
 
 
@@ -155,5 +149,5 @@ def train(model, train_loader, val_loader, optimizer, scheduler, criterion, epoc
         history['train_acc'].append(train_acc)
         history['val_acc'].append(val_acc)
         torch.save({'history': history}, './history.pth')
-        print("HAHAAHAHAH")
+
     return history
