@@ -25,7 +25,6 @@ class ZCA(object):
 
 
 if __name__ == '__main__':
-    # path = f'C:\\Users\X260\Desktop\cifar10\cifar10'
     path = '.\cifar10\cifar10'
 
     train_files = list((Path(path + '\\train').rglob('*.png')))
@@ -39,17 +38,10 @@ if __name__ == '__main__':
     train_zca_rescaled = ((train_zca - train_zca.min()) / (train_zca.max() - train_zca.min())).astype(np.float32)
     train_zca_min = train_zca.min()
     train_zca_max = train_zca.max()
-    print(train_zca_rescaled.shape)
-    print(to_tensor(train_zca_rescaled[0].reshape(3, 32, 32)).shape)
-    # whitened_train = [to_pil(to_tensor(array.reshape(3, 32, 32)).to(torch.float32)) for array in train_zca_rescaled]
     whitened_train = [to_pil(torch.tensor(array.reshape(3, 32, 32))) for array in train_zca_rescaled]
-    print(whitened_train[0].size)
     train_image_path = list(zip(whitened_train, train_files))
-    print(train_image_path)
 
-    # Path(f'C:\\Users\X260\Desktop\\ZCA_cifar10').mkdir()
-    # Path(f'C:\\Users\X260\Desktop\\ZCA_cifar10\\train').mkdir()
-    # Path(f'C:\\Users\X260\Desktop\\ZCA_cifar10\\test').mkdir()
+
     Path('.\ZCA_cifar10').mkdir()
     Path('.\ZCA_cifar10\\train').mkdir()
     Path('.\ZCA_cifar10\\test').mkdir()
@@ -57,17 +49,10 @@ if __name__ == '__main__':
     unique_labels = list(set([Path(file).parent.name for file in train_files]))
 
     for label in unique_labels:
-        # Path(f'C:\\Users\X260\Desktop\\ZCA_cifar10\\train\\' + label).mkdir()
-        # Path(f'C:\\Users\X260\Desktop\\ZCA_cifar10\\test\\' + label).mkdir()
         Path('.\ZCA_cifar10\\train' + label).mkdir()
         Path('.\ZCA_cifar10\\test' + label).mkdir()
     for element in train_image_path:
-        # element[0].save(f'C:\\Users\X260\Desktop\\ZCA_cifar10\\train\\' + element[1].parent.name + '\\' + element[1].name)
+
         element[0].save('.\ZCA_cifar10\\train' + element[1].parent.name + '\\' + element[1].name)
 
-
-    # for element in val_image_path:
-    #     element[0].save('ZCA_cifar10/test/' + element[1].parent.name + '/' + element[1].name)
-    #
-    # val_image_path = list(zip(whitened_val, val_data)))
 
