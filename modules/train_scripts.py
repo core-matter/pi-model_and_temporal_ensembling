@@ -1,9 +1,8 @@
 import torch
 from tqdm import tqdm
 from torch.nn.functional import softmax
-import config
-from utils import ramp_down, ramp_up
-
+import modules.config as config
+from modules.utils import ramp_down, ramp_up
 
 def fit_epoch(model, train_loader, criterion, optimizer, w_t, device='cpu'):
     """
