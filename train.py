@@ -10,9 +10,9 @@ import argparse
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset_path", type=str, default='.\ZCA_cifar10')
-    parser.add_argument('--checkpoints_path', type=str, default='.\checkpoints')
-    parser.add_argument('--writer_path', type=str, default='.\logs', help='path to save tensorboard logs')
+    parser.add_argument("--dataset_path", type=str, default='./ZCA_cifar10')
+    parser.add_argument('--checkpoints_path', type=str, default='./checkpoints')
+    parser.add_argument('--writer_path', type=str, default='./logs', help='path to save tensorboard logs')
     parser.add_argument('--max_lr', type=float, default=0.003, help='maximum learning rate')
     parser.add_argument('--num_epochs', type=int, default=10, help='total number of epochs')
     parser.add_argument('--num_classes', type=int, default=10)
