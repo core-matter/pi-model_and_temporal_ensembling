@@ -78,17 +78,18 @@ def eval_epoch(model, val_loader, criterion, w_t, device='cpu'):
         inputs1 = inputs1.to(device)
         inputs2 = inputs2.to(device)
         labels = labels.to(device)
+        
+        with torch.set_grad_enabled(False):
+            z1 = model(inputs1)
+            z2 = model(inputs2)
 
-        z1 = model(inputs1)
-        z2 = model(inputs2)
+            val_supervised_loss = criterion(z1, labels) + (w_t / (2 * inputs1.size(0))) * torch.sum((softmax(z1, dim=1) -
+                                                                                                     softmax(z2, dim=1)) ** 2) #TODO inputs1.size(0)) поменять на букву из статьи и импортить из конфига
+            val_unsupervised_loss = (w_t / (2 * inputs1.size(0))) * torch.sum((softmax(z1, dim=1) -
+                                                                               softmax(z2, dim=1)) ** 2)
 
-        val_supervised_loss = criterion(z1, labels) + (w_t / (2 * inputs1.size(0))) * torch.sum((softmax(z1, dim=1) -
-                                                                                                 softmax(z2, dim=1)) ** 2) #TODO inputs1.size(0)) поменять на букву из статьи и импортить из конфига
-        val_unsupervised_loss = (w_t / (2 * inputs1.size(0))) * torch.sum((softmax(z1, dim=1) -
-                                                                           softmax(z2, dim=1)) ** 2)
-
-        loss = (val_supervised_loss + val_unsupervised_loss)
-        preds = torch.argmax(z1, 1)
+            loss = (val_supervised_loss + val_unsupervised_loss)
+            preds = torch.argmax(z1, 1)
         running_loss += loss.item() * inputs1.size(0)
         running_corrects += torch.sum(preds == labels.data)
         processed_size += inputs1.size(0)
