@@ -46,13 +46,13 @@ class PiModelDataset(Dataset):
             image1 = image1 * (config.X_ZCAmax - config.X_ZCAmin) + config.X_ZCAmin
             image2 = image2 * (config.X_ZCAmax - config.X_ZCAmin) + config.X_ZCAmin
         else:
-            print('Wrong mode: available modes - train, test')  # TODO кидать исключение или оставить так
+            print('Wrong mode: available modes - train, test')  # TODO raise error
         if idx in self.supervised_part:
             label = self.labels[idx]
         else:
             label = config.no_label
 
-        if self.mode == 'train' or self.mode == 'test':  # TODO переделать
+        if self.mode == 'train' or self.mode == 'test':  # TODO 
             return image1, image2, label
         else:
             return image, label
